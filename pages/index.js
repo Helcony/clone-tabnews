@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import monkeyImg from '../public/monkeyimg.jpeg'
-import monkeyGif from '../public/monkey.gif'
+import monkeyImg from '/public/monkeyimg.jpeg'
+import monkeyGif from '/public/monkey.gif'
 
 function Home() {
   return <>
