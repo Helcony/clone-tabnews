@@ -9,9 +9,33 @@ async function query(queryObject) {
         password: process.env.POSTGRES_PASSWORD,
     })
     await client.connect()
-    const result = await client.query(queryObject)
-    client.end()
-    return result
+
+    try {
+        const result = await client.query(queryObject)
+        return result
+    } catch {
+        console.log(error)
+    } finally {
+        await client.end()
+    }
+}
+
+export async function getPostgresVersion() {
+    const res = await query('SHOW server_version;')
+    return res.rows[0].server_version
+}
+
+export async function getMaxConnections() {
+    const res = await query('SHOW max_connections;')
+    return res.rows[0].max_connections
+}
+
+export async function getCurrentConnections(databaseName) {
+    const res = await query({
+        text: "SELECT count(*) FROM pg_stat_activity WHERE datname = $1;",
+        values: [databaseName]
+    })
+    return res.rows[0].count
 }
 
 export default {
