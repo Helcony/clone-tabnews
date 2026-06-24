@@ -1,9 +1,26 @@
-import database from "infra/database.js"
+import database, {getPostgresVersion, getMaxConnections, getCurrentConnections} from 'infra/database.js'
 
 async function status(req, res) {
-  const result = await database.query('SELECT 1 + 1 as sum;')
-  console.log(result.rows)
-  res.status(200).json({ chave: "a" })
+  const updatedAt = new Date().toISOString()
+
+  const postgresVersion = await getPostgresVersion()
+
+  const maxConnections = await getMaxConnections()
+
+  const databaseName = req.query.databaseName
+
+  const currentConnections = await getCurrentConnections(databaseName)
+
+  res.status(200).json({
+    updated_at: updatedAt,
+    dependencies: {
+      database: {
+        version: postgresVersion,
+        max_connections: parseInt(maxConnections),
+        current_connections: parseInt(currentConnections),
+      }
+    }
+  })
 }
 
 export default status;
