@@ -11,13 +11,17 @@
     "lint:r": "prettier --check .",
     "lint:w": "prettier --write .",
     "test": "jest",
-    "test:watch": "jest --watchAll"
+    "test:watch": "jest --watchAll",
+    "migration:create": "node-pg-migrate --migrations-dir infra/migrations create",
+    "migration:up": "node-pg-migrate --migrations-dir infra/migrations --envPath .env.development up"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "dotenv": "^16.4.4",
     "js-yaml": "^5.1.0",
     "next": "^13.1.6",
+    "node-pg-migrate": "^6.2.2",
     "pg": "^8.11.3",
     "postgresql-client": "^2.13.0",
     "psql": "^0.0.1",
