@@ -39,6 +39,7 @@ async function getNewClient() {
     return client
 }
 
+
 export async function getPostgresVersion() {
     const res = await query('SHOW server_version;')
     return res.rows[0].server_version
@@ -49,7 +50,12 @@ export async function getMaxConnections() {
     return res.rows[0].max_connections
 }
 
-export async function getCurrentConnections(databaseName) {
+export async function getCurrentConnections() {
+    const res = await query("SELECT count(*) FROM pg_stat_activity WHERE backend_type = 'client backend';")
+    return res.rows[0].count
+}
+
+export async function getCurrentDbConnections(databaseName) {
     const res = await query({
         text: "SELECT count(*) FROM pg_stat_activity WHERE datname = $1;",
         values: [databaseName]

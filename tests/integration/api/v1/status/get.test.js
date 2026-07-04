@@ -1,5 +1,5 @@
 test("GET to api/v1/status should return 200", async () => {
-  const res = await fetch("http://localhost:3000/api/v1/status?databaseName=local_db")
+  const res = await fetch("http://localhost:3000/api/v1/status")
   expect(res.status).toBe(200)
   
   const responseBody = await res.json()
@@ -20,5 +20,4 @@ test("GET to api/v1/status should return 200", async () => {
 
 test("SQL test", async () => {
   const res = await fetch("http://localhost:3000/api/v1/status?databaseName=local_db")
-
 })
