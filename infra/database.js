@@ -51,13 +51,13 @@ export async function getMaxConnections() {
 }
 
 export async function getCurrentConnections() {
-    const res = await query("SELECT count(*) FROM pg_stat_activity WHERE backend_type = 'client backend';")
+    const res = await query("SELECT count(*) FROM pg_stat_activity WHERE backend_type = 'client backend' AND state = 'active';")
     return res.rows[0].count
 }
 
 export async function getCurrentDbConnections(databaseName) {
     const res = await query({
-        text: "SELECT count(*) FROM pg_stat_activity WHERE datname = $1;",
+        text: "SELECT count(*) FROM pg_stat_activity WHERE datname = $1 AND backend_type = 'client backend' AND state = 'active';",
         values: [databaseName]
     })
     return res.rows[0].count
