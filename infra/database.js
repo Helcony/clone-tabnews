@@ -64,7 +64,9 @@ export async function getCurrentDbConnections(databaseName) {
   return res.rows[0].count;
 }
 
-export default {
+const database = {
   query,
   getNewClient,
 };
+
+export default database;
