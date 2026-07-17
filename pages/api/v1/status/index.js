@@ -1,4 +1,4 @@
-import database, {
+import {
   getPostgresVersion,
   getMaxConnections,
   getCurrentConnections,
