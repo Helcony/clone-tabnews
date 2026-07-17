@@ -30,6 +30,6 @@ describe("POST /api/v1/migrations", () => {
         expect(Array.isArray(res2Body)).toBe(true);
         expect(res2Body.length).toBe(0);
       });
-    })
-  })
-})
+    });
+  });
+});
