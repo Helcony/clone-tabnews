@@ -24,10 +24,11 @@ function UpdatedAt() {
   let UpdatedAtText = "Loading...";
 
   if (!isLoading && data) {
-    UpdatedAtText = new Date(data.updated_at).toLocaleString("pt-BR");
+    const formattedDate = new Date(data.updated_at).toLocaleString("pt-BR")
+    UpdatedAtText = ("Last updated" + formattedDate);
   }
 
-  return <div>Última atualização: {UpdatedAtText}</div>;
+  return <div>{UpdatedAtText}</div>;
 }
 
 function DatabaseStatus() {
@@ -35,7 +36,7 @@ function DatabaseStatus() {
     refreshInterval: 2000,
   });
 
-  let databaseText = "Loading...";
+  let databaseText;
 
   if (!isLoading && data) {
     const databaseJsonPath = data.dependencies.database;
@@ -50,12 +51,11 @@ function DatabaseStatus() {
         </div>
       </>
     );
+    return (
+      <>
+        <h2>Database</h2>
+        <div>{databaseText}</div>
+      </>
+    );
   }
-
-  return (
-    <>
-      <h2>Database</h2>
-      <div>{databaseText}</div>
-    </>
-  );
 }
