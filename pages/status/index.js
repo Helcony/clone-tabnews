@@ -25,7 +25,7 @@ function UpdatedAt() {
 
   if (!isLoading && data) {
     const formattedDate = new Date(data.updated_at).toLocaleString("pt-BR");
-    UpdatedAtText = "Last updated" + formattedDate;
+    UpdatedAtText = "Last updated at " + formattedDate;
   }
 
   return <div>{UpdatedAtText}</div>;
