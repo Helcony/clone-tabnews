@@ -40,7 +40,7 @@ async function status(req, res) {
     });
 
     console.log("Something went wrong in the controller");
-    console.log(publicErrorObject);
+    console.error(publicErrorObject);
 
     res.status(500).json(publicErrorObject);
   }
