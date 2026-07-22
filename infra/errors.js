@@ -3,9 +3,10 @@ export class InternalServerError extends Error {
     super("An unexpected internal error has occurred", {
       cause,
     });
-    this.name = "InternalServerError"
-    this.action = "Please try again later. If the problem persists, please get in touch with the support team."
-    this.statusCode = 500
+    this.name = "InternalServerError";
+    this.action =
+      "Please try again later. If the problem persists, please get in touch with the support team.";
+    this.statusCode = 500;
   }
 
   toJSON() {
@@ -14,6 +15,6 @@ export class InternalServerError extends Error {
       message: this.message,
       action: this.action,
       status_code: this.statusCode,
-    }
+    };
   }
 }
